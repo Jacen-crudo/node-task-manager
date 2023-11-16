@@ -9,14 +9,14 @@ router.post('/tasks', async (req, res) => {
         await task.save()
         res.status(201)
             .send({
-                request: 'SUCCESS',
+                status: 'SUCCESS',
                 message: 'Task created!',
                 data: task
             })
     } catch (e) {
         res.status(400)
             .send({
-                request: 'ERROR',
+                status: 'ERROR',
                 error: e
             })
     }
@@ -28,7 +28,7 @@ router.get('/tasks', async (req, res) => {
         const tasks = await Task.find({})
         res.status(202)
             .send({
-                request: 'SUCCESS',
+                status: 'SUCCESS',
                 message: 'Retreived tasks',
                 data: tasks
             })
@@ -46,7 +46,7 @@ router.get('/tasks/:id', async (req, res) => {
         if(!task) return res.status(404).send()
 
         res.send({
-                request: 'SUCCESS',
+                status: 'SUCCESS',
                 message: 'User found!',
                 data: task
             })
@@ -63,7 +63,7 @@ router.patch('/tasks/:id', async (req, res) => {
     if (!isValidOp) {
         return res.status(400)
             .send({
-                request: 'ERROR',
+                status: 'ERROR',
                 error: 'Invalid Updates!',
                 message: 'Allowed Updates: ' + allowedUpdates
             })
@@ -75,7 +75,7 @@ router.patch('/tasks/:id', async (req, res) => {
         if (!task) res.status(404).send()
 
         res.send({
-            request: 'SUCCESS',
+            status: 'SUCCESS',
             message: 'Task updated',
             data: task
         })
@@ -83,7 +83,7 @@ router.patch('/tasks/:id', async (req, res) => {
     } catch (e) {
         res.status(400)
             .send({
-                request: 'ERROR',
+                status: 'ERROR',
                 error: e
             })
     }
@@ -96,7 +96,7 @@ router.delete('/tasks/:id', async (req, res) => {
         if (!task) return res.status(404).send()
 
         res.send({
-            request: 'SUCCESS',
+            status: 'SUCCESS',
             message: 'Task deleted!',
             data: task
         })

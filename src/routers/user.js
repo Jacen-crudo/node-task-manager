@@ -9,14 +9,14 @@ router.post('/users', async (req, res) => {
         await user.save()
         res.status(201)
             .send({
-                request: 'SUCCESS',
+                status: 'SUCCESS',
                 message: 'User created!',
                 data: user
             })
     } catch (e) {
         res.status(400)
             .send({
-                request: 'ERROR',
+                status: 'ERROR',
                 error: e
             })
     }
@@ -27,7 +27,7 @@ router.get('/users', async (req, res) => {
         const users = await User.find({})
         res.status(202)
             .send({
-                request: 'SUCCESS',
+                status: 'SUCCESS',
                 message: 'Retreived users',
                 data: users
             })
@@ -44,7 +44,7 @@ router.get('/users/:id', async (req, res) => {
 
         if(!user) return res.status(404).send()
         res.send({
-            request: 'SUCCESS',
+            status: 'SUCCESS',
             message: 'User found!',
             data: user
         })
@@ -61,7 +61,7 @@ router.patch('/users/:id', async (req, res) => {
     if (!isValidOp) {
         return res.status(400)
             .send({
-                request: 'ERROR',
+                status: 'ERROR',
                 error: 'Invalid Updates!',
                 message: 'Allowed Updates: ' + allowedUpdates
             })
@@ -73,7 +73,7 @@ router.patch('/users/:id', async (req, res) => {
         if (!user) res.status(404).send()
 
         res.send({
-                request: 'SUCCESS',
+                status: 'SUCCESS',
                 message: 'User updated',
                 data: user
             })
@@ -81,7 +81,7 @@ router.patch('/users/:id', async (req, res) => {
     } catch (e) {
         res.status(400)
             .send({
-                request: 'ERROR',
+                status: 'ERROR',
                 error: e
             })
     }
@@ -94,7 +94,7 @@ router.delete('/users/:id', async (req, res) => {
         if (!user) return res.status(404).send()
 
         res.send({
-            request: 'SUCCESS',
+            status: 'SUCCESS',
             message: 'User deleted!',
             data: user
         })
